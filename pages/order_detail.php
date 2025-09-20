@@ -37,6 +37,14 @@ if($order_id > 0) {
     header("Location: ?page=orders");
     exit;
 }
+
+// Get message from URL if exists
+if(isset($_GET['message'])) {
+    $message = sanitize_input($_GET['message']);
+}
+if(isset($_GET['error'])) {
+    $error = sanitize_input($_GET['error']);
+}
 ?>
 
 <div class="py-12 bg-white">
@@ -142,7 +150,7 @@ if($order_id > 0) {
                                 </div>
                                 
                                 <div class="border-t border-gray-200 pt-4 flex justify-between">
-                                    <span class="text-base font-medium text-gray-900">Total</span>
+                                    <span class="text-base font-medium text-gray-900">Total Paid</span>
                                     <span class="text-base font-medium text-gray-900"><?php echo format_currency($order['total_amount']); ?></span>
                                 </div>
                             </div>
@@ -187,10 +195,57 @@ if($order_id > 0) {
                 <div class="px-4 py-4 bg-gray-50 sm:px-6">
                     <div class="flex justify-end">
                         <?php if($order['payment_status'] === 'pending'): ?>
-                        <a href="?page=payment&order_id=<?php echo $order['id']; ?>" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                        <a href="?page=payment&order_id=<?php echo $order['id']; ?>" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             Complete Payment
                         </a>
                         <?php endif; ?>
+                        <a href="?page=marketplace" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Next Steps -->
+        <div class="mt-12">
+            <div class="bg-green-50 rounded-lg p-8">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-2xl font-bold text-gray-900">What Happens Next?</h2>
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div>
+                            <div class="flex justify-center">
+                                <div class="flex-shrink-0 h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="mt-4 text-lg font-medium text-gray-900">Order Processing</h3>
+                            <p class="mt-2 text-sm text-gray-500">We're preparing your order for shipment</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-center">
+                                <div class="flex-shrink-0 h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m16-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="mt-4 text-lg font-medium text-gray-900">Shipment</h3>
+                            <p class="mt-2 text-sm text-gray-500">Your order will be shipped within 3-5 business days</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-center">
+                                <div class="flex-shrink-0 h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="mt-4 text-lg font-medium text-gray-900">Delivery</h3>
+                            <p class="mt-2 text-sm text-gray-500">Track your order and receive delivery updates</p>
+                        </div>
                     </div>
                 </div>
             </div>

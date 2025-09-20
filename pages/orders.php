@@ -14,11 +14,37 @@ if(!isset($_SESSION['user_logged_in']) || !$_SESSION['user_logged_in']) {
 $user_id = $_SESSION['user_id'];
 
 // Get user's orders
-$stmt = $connection->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC");
+$stmt = $connection->prepare("
+    SELECT o.*, 
+           CASE 
+               WHEN o.status = 'pending' THEN 'bg-yellow-100 text-yellow-800'
+               WHEN o.status = 'processing' THEN 'bg-blue-100 text-blue-800'
+               WHEN o.status = 'shipped' THEN 'bg-purple-100 text-purple-800'
+               WHEN o.status = 'delivered' THEN 'bg-green-100 text-green-800'
+               ELSE 'bg-gray-100 text-gray-800'
+           END as status_class,
+           CASE 
+               WHEN o.payment_status = 'pending' THEN 'bg-yellow-100 text-yellow-800'
+               WHEN o.payment_status = 'paid' THEN 'bg-green-100 text-green-800'
+               WHEN o.payment_status = 'failed' THEN 'bg-red-100 text-red-800'
+               ELSE 'bg-gray-100 text-gray-800'
+           END as payment_status_class
+    FROM orders o 
+    WHERE o.user_id = ? 
+    ORDER BY o.created_at DESC
+");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $orders = $result->fetch_all(MYSQLI_ASSOC);
+
+// Get message from URL if exists
+if(isset($_GET['message'])) {
+    $message = sanitize_input($_GET['message']);
+}
+if(isset($_GET['error'])) {
+    $error = sanitize_input($_GET['error']);
+}
 ?>
 
 <div class="py-12 bg-white">
@@ -72,7 +98,7 @@ $orders = $result->fetch_all(MYSQLI_ASSOC);
             <h3 class="mt-2 text-lg font-medium text-gray-900">No orders yet</h3>
             <p class="mt-1 text-gray-500">Start shopping for eco-friendly products.</p>
             <div class="mt-6">
-                <a href="?page=products" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                <a href="?page=marketplace" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                     Browse Products
                 </a>
             </div>
@@ -133,27 +159,12 @@ $orders = $result->fetch_all(MYSQLI_ASSOC);
                                             <?php echo format_currency($order['total_amount']); ?>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                                <?php 
-                                                switch($order['status']) {
-                                                    case 'pending': echo 'bg-yellow-100 text-yellow-800'; break;
-                                                    case 'processing': echo 'bg-blue-100 text-blue-800'; break;
-                                                    case 'shipped': echo 'bg-purple-100 text-purple-800'; break;
-                                                    case 'delivered': echo 'bg-green-100 text-green-800'; break;
-                                                }
-                                                ?>">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <?php echo $order['status_class']; ?>">
                                                 <?php echo ucfirst($order['status']); ?>
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                                <?php 
-                                                switch($order['payment_status']) {
-                                                    case 'pending': echo 'bg-yellow-100 text-yellow-800'; break;
-                                                    case 'paid': echo 'bg-green-100 text-green-800'; break;
-                                                    case 'failed': echo 'bg-red-100 text-red-800'; break;
-                                                }
-                                                ?>">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <?php echo $order['payment_status_class']; ?>">
                                                 <?php echo ucfirst($order['payment_status']); ?>
                                             </span>
                                         </td>

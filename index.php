@@ -101,6 +101,12 @@ switch($page) {
     case 'payment':
         include 'pages/payment.php';
         break;
+    case 'orders':
+        include 'pages/orders.php';
+        break;
+    case 'order_detail':
+        include 'pages/order_detail.php';
+        break;
     default:
         include 'pages/home.php';
 }
