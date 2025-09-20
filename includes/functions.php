@@ -1,5 +1,8 @@
 <!-- includes/functions.php -->
 <?php
+
+//error_reporting(E_ALL & ~E_WARNING);
+
 // Function to sanitize input
 function sanitize_input($data) {
     $data = trim($data);
@@ -76,6 +79,24 @@ function calculate_progress($current, $target) {
     if ($target <= 0) return 0;
     return min(100, round(($current / $target) * 100));
 }
+if (!function_exists('get_user_avatar')) {
+    function get_user_avatar($name) {
+        // If name is empty, fallback to "GU" (Guest User)
+        if (empty($name)) {
+            return 'GU';
+        }
 
+        // Split name into words
+        $words = preg_split('/\s+/', trim($name));
+
+        // Take first two words, or duplicate if only one word exists
+        $first = strtoupper(substr($words[0], 0, 1));
+        $second = isset($words[1]) 
+            ? strtoupper(substr($words[1], 0, 1)) 
+            : strtoupper(substr($words[0], 1, 1)); // Use 2nd letter of first word if no second word
+
+        return $first . $second;
+    }
+}
 
 ?>

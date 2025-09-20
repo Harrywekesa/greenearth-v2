@@ -1,5 +1,11 @@
 <!-- index.php -->
 <?php
+ob_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
 require_once 'includes/config.php';
 require_once 'includes/functions.php';
 
@@ -77,7 +83,11 @@ switch($page) {
     case 'cart':
         include 'pages/cart.php';
         break;
+    case 'checkout':
+        include 'pages/checkout.php';
+        break;
     default:
         include 'pages/home.php';
 }
+ob_end_flush();
 ?>

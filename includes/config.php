@@ -105,7 +105,9 @@ function get_cart_item_count() {
 }
 
 // Start session
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Include database connection
 require_once 'database.php';
