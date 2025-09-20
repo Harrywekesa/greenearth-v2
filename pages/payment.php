@@ -6,6 +6,7 @@ $error = '';
 
 // Check if user is logged in
 if(!isset($_SESSION['user_logged_in']) || !$_SESSION['user_logged_in']) {
+    $_SESSION['redirect_after_login'] = '?page=payment&order_id=' . (isset($_GET['order_id']) ? (int)$_GET['order_id'] : 0);
     header("Location: ?page=login");
     exit;
 }
@@ -42,26 +43,51 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     switch($payment_method) {
         case 'mpesa':
+            $mpesa_number = sanitize_input($_POST['mpesa_number']);
+            if(empty($mpesa_number)) {
+                $error = "M-Pesa number is required";
+                break;
+            }
+            // In a real implementation, this would process M-Pesa payment
             $transaction_id = 'MPESA' . strtoupper(uniqid());
             break;
+            
         case 'paypal':
+            // In a real implementation, this would redirect to PayPal
             $transaction_id = 'PAYPAL' . strtoupper(uniqid());
             break;
+            
         case 'card':
+            $card_number = sanitize_input($_POST['card_number']);
+            $expiry_date = sanitize_input($_POST['expiry_date']);
+            $cvv = sanitize_input($_POST['cvv']);
+            $cardholder_name = sanitize_input($_POST['cardholder_name']);
+            
+            if(empty($card_number) || empty($expiry_date) || empty($cvv) || empty($cardholder_name)) {
+                $error = "All card details are required";
+                break;
+            }
+            
+            // In a real implementation, this would process card payment
             $transaction_id = 'CARD' . strtoupper(uniqid());
             break;
+            
+        default:
+            $error = "Invalid payment method";
     }
     
-    // Update order with payment details
-    $stmt = $connection->prepare("UPDATE orders SET payment_status = 'paid', transaction_id = ?, payment_method = ? WHERE id = ?");
-    $stmt->bind_param("ssi", $transaction_id, $payment_method, $order_id);
-    
-    if($stmt->execute()) {
-        $message = "Payment processed successfully!";
-        header("Location: ?page=order_confirmation&order_id=" . $order_id . "&message=" . urlencode($message));
-        exit;
-    } else {
-        $error = "Error processing payment: " . $stmt->error;
+    if(!$error) {
+        // Update order with payment details
+        $stmt = $connection->prepare("UPDATE orders SET payment_status = 'paid', transaction_id = ?, payment_method = ? WHERE id = ?");
+        $stmt->bind_param("ssi", $transaction_id, $payment_method, $order_id);
+        
+        if($stmt->execute()) {
+            $message = "Payment processed successfully!";
+            header("Location: ?page=order_confirmation&order_id=" . $order_id . "&message=" . urlencode($message));
+            exit;
+        } else {
+            $error = "Error processing payment: " . $stmt->error;
+        }
     }
 }
 ?>
@@ -112,7 +138,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="mt-12">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-2">
-                    <div class="bg-white rounded-lg shadow">
+                    <div class="bg-white shadow rounded-lg">
                         <div class="px-4 py-5 sm:p-6">
                             <h2 class="text-lg font-medium text-gray-900">Payment Method: <?php echo ucfirst($order['payment_method']); ?></h2>
                             
@@ -134,12 +160,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
                                         
                                         <div class="mt-6">
-                                            <form method="POST">
+                                            <form method="POST" action="">
                                                 <input type="hidden" name="payment_method" value="mpesa">
                                                 
                                                 <div>
-                                                    <label for="mpesa_code" class="block text-sm font-medium text-blue-700">M-Pesa Transaction Code</label>
-                                                    <input type="text" name="mpesa_code" id="mpesa_code" required class="mt-1 block w-full border border-blue-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                    <label for="mpesa_number" class="block text-sm font-medium text-blue-700">M-Pesa Phone Number</label>
+                                                    <input type="tel" name="mpesa_number" id="mpesa_number" placeholder="2547XXXXXXXX" required class="mt-1 block w-full border border-blue-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                                 </div>
                                                 
                                                 <div class="mt-4">
@@ -169,11 +195,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
                                         
                                         <div class="mt-6">
-                                            <form method="POST">
+                                            <form method="POST" action="">
                                                 <input type="hidden" name="payment_method" value="paypal">
                                                 
-                                                <div class="flex justify-center">
-                                                    <button type="submit" class="px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                <div>
+                                                    <label for="paypal_email" class="block text-sm font-medium text-blue-700">PayPal Email</label>
+                                                    <input type="email" name="paypal_email" id="paypal_email" placeholder="your-paypal@email.com" required class="mt-1 block w-full border border-blue-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                </div>
+                                                
+                                                <div class="mt-4">
+                                                    <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                                         Pay with PayPal
                                                     </button>
                                                 </div>
@@ -199,7 +230,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
                                         
                                         <div class="mt-6">
-                                            <form method="POST">
+                                            <form method="POST" action="">
                                                 <input type="hidden" name="payment_method" value="card">
                                                 
                                                 <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -240,7 +271,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 
                 <div class="lg:col-span-1">
-                    <div class="bg-white rounded-lg shadow">
+                    <div class="bg-white shadow rounded-lg">
                         <div class="px-4 py-5 sm:p-6">
                             <h2 class="text-lg font-medium text-gray-900">Order Summary</h2>
                             
@@ -276,6 +307,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <span class="text-base font-medium text-gray-900"><?php echo format_currency($order['total_amount']); ?></span>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-white shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h2 class="text-lg font-medium text-gray-900">Shipping Information</h2>
+                            <div class="mt-4">
+                                <div class="text-sm text-gray-900"><?php echo htmlspecialchars($order['shipping_name']); ?></div>
+                                <div class="text-sm text-gray-900"><?php echo htmlspecialchars($order['shipping_address']); ?></div>
+                                <div class="text-sm text-gray-900"><?php echo htmlspecialchars($order['shipping_county']); ?>, <?php echo htmlspecialchars($order['shipping_subcounty']); ?></div>
+                                <div class="text-sm text-gray-900"><?php echo htmlspecialchars($order['shipping_phone']); ?></div>
+                                <div class="text-sm text-gray-900"><?php echo htmlspecialchars($order['shipping_email']); ?></div>
                             </div>
                         </div>
                     </div>

@@ -86,8 +86,24 @@ switch($page) {
     case 'checkout':
         include 'pages/checkout.php';
         break;
+    case 'login':
+        include 'pages/login.php';
+        break;
+    case 'register':
+        include 'pages/register.php';  
+        break;
+    case 'profile':
+        include 'pages/profile.php';
+        break;
+    case 'logout':
+        include 'pages/logout.php';
+        break;
+    case 'payment':
+        include 'pages/payment.php';
+        break;
     default:
         include 'pages/home.php';
 }
+
 ob_end_flush();
 ?>

@@ -45,16 +45,39 @@
         
         /* Navigation styles */
         .nav-link {
-            @apply text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium;
+            color: #6b7280; /* text-gray-500 */
+            padding-left: 0.75rem; /* px-3 */
+            padding-right: 0.75rem;
+            padding-top: 0.5rem; /* py-2 */
+            padding-bottom: 0.5rem;
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #374151; /* text-gray-700 */
         }
         
         .nav-link.active {
-            @apply bg-green-100 text-green-700;
+            background-color: #dcfce7; /* bg-green-100 */
+            color: #15803d; /* text-green-700 */
         }
         
         /* Cart badge */
         .cart-badge {
-            @apply absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center;
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+            background-color: #ef4444; /* Tailwind bg-red-500 */
+            color: #fff; /* Tailwind text-white */
+            font-size: 0.75rem; /* Tailwind text-xs */
+            border-radius: 9999px; /* Tailwind rounded-full */
+            height: 1.25rem; /* Tailwind h-5 */
+            width: 1.25rem; /* Tailwind w-5 */
+            display: flex; /* Tailwind flex */
+            align-items: center; /* Tailwind items-center */
+            justify-content: center; /* Tailwind justify-center */
         }
     </style>
 </head>
