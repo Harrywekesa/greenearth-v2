@@ -183,7 +183,7 @@ if(isset($_GET['error'])) {
                                                     </div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                    <?php echo htmlspecialchars($post['author_name']); ?>
+                                                    <?php echo htmlspecialchars($post['author_name'] ?? 'Unknown'); ?>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <?php echo $post['published_at'] ? date('M j, Y', strtotime($post['published_at'])) : 'Not published'; ?>
