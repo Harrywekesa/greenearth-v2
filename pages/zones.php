@@ -54,8 +54,14 @@ $zones = $result->fetch_all(MYSQLI_ASSOC);
         </div>
     </div>
 </div>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
+
 // Initialize zones map
 document.addEventListener('DOMContentLoaded', function() {
     // Create map centered on Kenya

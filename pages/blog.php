@@ -66,7 +66,6 @@ $posts = $result->fetch_all(MYSQLI_ASSOC);
                         </div>
                         <h3 class="mt-2 text-xl font-bold text-gray-900"><?php echo htmlspecialchars($post['title']); ?></h3>
                         <p class="mt-3 text-gray-600"><?php echo htmlspecialchars($post['excerpt']); ?></p>
-
                         <div class="mt-4">
                             <a href="?page=blog_post&id=<?php echo $post['id']; ?>" class="text-green-600 hover:text-green-800 font-medium">
                                 Read more →
