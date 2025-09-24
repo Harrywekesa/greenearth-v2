@@ -55,7 +55,10 @@ $stats = $result->fetch_assoc();
                 <?php foreach($initiatives as $initiative): ?>
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <?php if($initiative['image']): ?>
-                        <img src="uploads/initiatives/<?php echo $initiative['image']; ?>" alt="<?php echo htmlspecialchars($initiative['title']); ?>" class="w-full h-48 object-cover">
+                        <img src="admin/uploads/initiatives/<?php echo htmlspecialchars($initiative['image']); ?>" 
+     alt="<?php echo htmlspecialchars($initiative['title']); ?>" 
+     class="w-full h-48 object-cover">
+
                     <?php else: ?>
                         <div class="bg-gray-200 border-2 border-dashed rounded-t-lg w-full h-48 flex items-center justify-center">
                             <span class="text-gray-500">Initiative Image</span>
@@ -64,7 +67,10 @@ $stats = $result->fetch_assoc();
                     <div class="p-6">
                         <div class="flex items-center">
                             <?php if($initiative['partner_logo']): ?>
-                                <img src="uploads/partners/<?php echo $initiative['partner_logo']; ?>" alt="<?php echo htmlspecialchars($initiative['partner_name']); ?>" class="h-8 w-8 object-contain">
+                                <img src="admin/uploads/partners/<?php echo htmlspecialchars($initiative['partner_logo']); ?>" 
+     alt="<?php echo htmlspecialchars($initiative['partner_name']); ?>" 
+     class="w-8 h-8 object-cover rounded-full">
+
                             <?php else: ?>
                                 <div class="bg-gray-200 border-2 border-dashed rounded-xl w-8 h-8 flex items-center justify-center">
                                     <span class="text-gray-500 text-xs">P</span>

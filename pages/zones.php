@@ -28,7 +28,9 @@ $zones = $result->fetch_all(MYSQLI_ASSOC);
                 <?php foreach($zones as $zone): ?>
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <?php if($zone['image']): ?>
-                        <img src="uploads/zones/<?php echo $zone['image']; ?>" alt="<?php echo $zone['name']; ?>" class="w-full h-48 object-cover">
+                        <img src="admin/uploads/zones/<?php echo htmlspecialchars($zone['image']); ?>" 
+     alt="<?php echo htmlspecialchars($zone['name']); ?>" 
+     class="w-full h-48 object-cover">
                     <?php else: ?>
                         <div class="bg-gray-200 border-2 border-dashed rounded-t-lg w-full h-48 flex items-center justify-center">
                             <span class="text-gray-500">Zone Image</span>

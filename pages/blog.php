@@ -48,7 +48,7 @@ $posts = $result->fetch_all(MYSQLI_ASSOC);
                 <?php foreach($posts as $post): ?>
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <?php if($post['featured_image']): ?>
-                        <img src="uploads/blog/<?php echo $post['featured_image']; ?>" alt="<?php echo $post['title']; ?>" class="w-full h-48 object-cover">
+                        <img src="admin/uploads/blog/<?php echo htmlspecialchars($post['featured_image']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>" class="w-full h-48 object-cover">
                     <?php else: ?>
                         <div class="bg-gray-200 border-2 border-dashed rounded-t-lg w-full h-48 flex items-center justify-center">
                             <span class="text-gray-500">Blog Image</span>
@@ -64,8 +64,9 @@ $posts = $result->fetch_all(MYSQLI_ASSOC);
                                 <?php echo $post['author_name']; ?>
                             </span>
                         </div>
-                        <h3 class="mt-2 text-xl font-bold text-gray-900"><?php echo $post['title']; ?></h3>
-                        <p class="mt-3 text-gray-600"><?php echo $post['excerpt']; ?></p>
+                        <h3 class="mt-2 text-xl font-bold text-gray-900"><?php echo htmlspecialchars($post['title']); ?></h3>
+                        <p class="mt-3 text-gray-600"><?php echo htmlspecialchars($post['excerpt']); ?></p>
+
                         <div class="mt-4">
                             <a href="?page=blog_post&id=<?php echo $post['id']; ?>" class="text-green-600 hover:text-green-800 font-medium">
                                 Read more →

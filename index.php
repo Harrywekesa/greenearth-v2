@@ -59,6 +59,9 @@ switch($page) {
     case 'initiative_detail':
         include 'pages/initiative_detail.php';
         break;
+    case 'events':
+        include 'pages/events.php'; 
+        break;
     case 'event_detail':
         include 'pages/event_detail.php';
         break;
