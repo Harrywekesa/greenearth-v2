@@ -1,13 +1,13 @@
--- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
+-- MySQL dump 10.13  Distrib 8.4.3, for Win64 (x86_64)
 --
 -- Host: localhost    Database: greenearth
 -- ------------------------------------------------------
--- Server version	10.4.32-MariaDB
+-- Server version	8.4.3
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,17 +21,17 @@
 
 DROP TABLE IF EXISTS `badges`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `badges` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `description` text DEFAULT NULL,
-  `icon` varchar(255) DEFAULT NULL,
-  `points_required` int(11) DEFAULT 0,
-  `criteria` text DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
+  `icon` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `points_required` int DEFAULT '0',
+  `criteria` text COLLATE utf8mb4_general_ci,
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -52,22 +52,22 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `blog_posts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `blog_posts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) NOT NULL,
-  `slug` varchar(200) NOT NULL,
-  `excerpt` text DEFAULT NULL,
-  `content` longtext DEFAULT NULL,
-  `featured_image` varchar(255) DEFAULT NULL,
-  `author_id` int(11) DEFAULT NULL,
-  `meta_description` varchar(255) DEFAULT NULL,
-  `meta_keywords` varchar(255) DEFAULT NULL,
-  `is_published` tinyint(1) DEFAULT 0,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `slug` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `excerpt` text COLLATE utf8mb4_general_ci,
+  `content` longtext COLLATE utf8mb4_general_ci,
+  `featured_image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `author_id` int DEFAULT NULL,
+  `meta_description` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `meta_keywords` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `is_published` tinyint(1) DEFAULT '0',
   `published_at` timestamp NULL DEFAULT NULL,
-  `view_count` int(11) DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `view_count` int DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `author_id` (`author_id`),
@@ -81,7 +81,7 @@ CREATE TABLE `blog_posts` (
 
 LOCK TABLES `blog_posts` WRITE;
 /*!40000 ALTER TABLE `blog_posts` DISABLE KEYS */;
-INSERT INTO `blog_posts` VALUES (1,'The Importance of Indigenous Trees in Kenya','importance-of-indigenous-trees','Discover why indigenous trees are crucial for Kenya\'s ecosystem and how you can help protect them.','<p>Indigenous trees play a vital role in maintaining Kenya\'s biodiversity and ecological balance...</p>',NULL,NULL,NULL,NULL,1,'2024-05-15 07:00:00',0,'2025-09-23 18:50:33','2025-09-23 18:50:33'),(2,'How to Start Your Own Tree Nursery','how-to-start-tree-nursery','A step-by-step guide to establishing a tree nursery in your community.','<p>Starting a tree nursery is a rewarding way to contribute to environmental conservation...</p>',NULL,NULL,NULL,NULL,1,'2024-05-20 11:30:00',0,'2025-09-23 18:50:33','2025-09-23 18:50:33'),(3,'Climate Change Impact on Kenyan Ecosystems','climate-change-kenya','Understanding how climate change is affecting Kenya\'s diverse ecosystems and what we can do about it.','<p>Kenya\'s varied climatic zones are experiencing significant changes due to global warming...</p>',NULL,NULL,NULL,NULL,1,'2024-05-25 06:15:00',0,'2025-09-23 18:50:33','2025-09-23 18:50:33');
+INSERT INTO `blog_posts` VALUES (1,'The Importance of Indigenous Trees in Kenya','importance-of-indigenous-trees','Discover why indigenous trees are crucial for Kenya\'s ecosystem and how you can help protect them.','<p>Indigenous trees play a vital role in maintaining Kenya\'s biodiversity and ecological balance...</p>',NULL,6,NULL,NULL,1,'2024-05-15 07:00:00',0,'2025-09-23 18:50:33','2025-09-24 08:30:37'),(2,'How to Start Your Own Tree Nursery','how-to-start-tree-nursery','A step-by-step guide to establishing a tree nursery in your community.','<p>Starting a tree nursery is a rewarding way to contribute to environmental conservation...</p>',NULL,7,NULL,NULL,1,'2024-05-20 11:30:00',0,'2025-09-23 18:50:33','2025-09-24 08:30:38'),(3,'Climate Change Impact on Kenyan Ecosystems','climate-change-kenya','Understanding how climate change is affecting Kenya\'s diverse ecosystems and what we can do about it.','<p>Kenya\'s varied climatic zones are experiencing significant changes due to global warming...</p>',NULL,8,NULL,NULL,1,'2024-05-25 06:15:00',0,'2025-09-23 18:50:33','2025-09-24 08:30:38');
 /*!40000 ALTER TABLE `blog_posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,19 +91,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `climatic_zones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `climatic_zones` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `slug` varchar(100) NOT NULL,
-  `description` text DEFAULT NULL,
-  `rainfall_pattern` varchar(50) DEFAULT NULL,
-  `soil_type` varchar(100) DEFAULT NULL,
-  `vegetation_type` varchar(100) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `slug` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
+  `rainfall_pattern` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `soil_type` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `vegetation_type` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -115,7 +115,7 @@ CREATE TABLE `climatic_zones` (
 
 LOCK TABLES `climatic_zones` WRITE;
 /*!40000 ALTER TABLE `climatic_zones` DISABLE KEYS */;
-INSERT INTO `climatic_zones` VALUES (1,'Coastal Plain','coastal-plain','The coastal plain is characterized by hot and humid conditions with high rainfall throughout the year. Temperatures range from 25-30°C with annual rainfall of 1000-1600mm.','Bimodal','Sandy','Coastal Forest','68d382d673f06.jpeg',1,'2025-09-23 18:50:30','2025-09-24 05:34:14'),(2,'Lowland','lowland','The lowland areas experience moderate temperatures with seasonal rainfall patterns. Annual rainfall ranges from 600-1200mm with temperatures between 20-28°C.','Unimodal','Clay','Savanna Grassland',NULL,1,'2025-09-23 18:50:30','2025-09-23 18:50:30'),(3,'Highland','highland','Highland areas have cooler temperatures due to elevation, with bimodal rainfall patterns. Temperatures range from 15-25°C with annual rainfall of 800-1500mm.','Bimodal','Volcanic','Montane Forest',NULL,1,'2025-09-23 18:50:30','2025-09-23 18:50:30'),(4,'Arid and Semi-Arid Zones (Hot and Dry)','arid-and-semi-arid-zones-hot-and-dry','Location: Northern and eastern Kenya including Turkana, Marsabit, Garissa, and Mandera.\r\n\r\nTemperature: Very hot, often above 35°C during the day.\r\n\r\nRainfall: Very low, less than 500 mm annually, and highly erratic leading to frequent droughts.\r\n\r\nSoil Type: Sandy, stony, and shallow soils, often with poor water retention.\r\n\r\nVegetation: Sparse cover with thorn bushes, acacia trees, cactus, and seasonal grasses.\r\n\r\nEconomic Activities: Nomadic pastoralism (camels, goats, cattle), limited irrigated agriculture along rivers like Tana and Turkwel.','Semi-arid','Sandy, stony, and shallow soils, often with poor water retention','Sparse cover with thorn bushes, acacia trees, cactus, and seasonal grasses.','68d380fd85be1.jpeg',1,'2025-09-24 05:17:04','2025-09-24 05:26:21');
+INSERT INTO `climatic_zones` VALUES (1,'Coastal Plain','coastal-plain','The coastal plain is characterized by hot and humid conditions with high rainfall throughout the year. Temperatures range from 25-30','Bimodal','Sandy','Coastal Forest','68d382d673f06.jpeg',1,'2025-09-23 18:50:30','2025-09-24 05:34:14'),(2,'Lowland','lowland','The lowland areas experience moderate temperatures with seasonal rainfall patterns. Annual rainfall ranges from 600-1200mm with temperatures between 20-28','Unimodal','Clay','Savanna Grassland',NULL,1,'2025-09-23 18:50:30','2025-09-23 18:50:30'),(3,'Highland','highland','Highland areas have cooler temperatures due to elevation, with bimodal rainfall patterns. Temperatures range from 15-25','Bimodal','Volcanic','Montane Forest',NULL,1,'2025-09-23 18:50:30','2025-09-23 18:50:30'),(4,'Arid and Semi-Arid Zones (Hot and Dry)','arid-and-semi-arid-zones-hot-and-dry','Location: Northern and eastern Kenya including Turkana, Marsabit, Garissa, and Mandera.\r\n\r\nTemperature: Very hot, often above 35','Semi-arid','Sandy, stony, and shallow soils, often with poor water retention','Sparse cover with thorn bushes, acacia trees, cactus, and seasonal grasses.','68d380fd85be1.jpeg',1,'2025-09-24 05:17:04','2025-09-24 05:26:21');
 /*!40000 ALTER TABLE `climatic_zones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,24 +125,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `events` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) NOT NULL,
-  `slug` varchar(200) NOT NULL,
-  `description` text DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `slug` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
   `event_date` datetime DEFAULT NULL,
-  `location` varchar(200) DEFAULT NULL,
+  `location` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `latitude` decimal(10,8) DEFAULT NULL,
   `longitude` decimal(11,8) DEFAULT NULL,
-  `initiative_id` int(11) DEFAULT NULL,
-  `max_volunteers` int(11) DEFAULT 50,
-  `current_volunteers` int(11) DEFAULT 0,
-  `image` varchar(255) DEFAULT NULL,
-  `status` enum('upcoming','ongoing','completed') DEFAULT 'upcoming',
-  `is_active` tinyint(1) DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `initiative_id` int DEFAULT NULL,
+  `max_volunteers` int DEFAULT '50',
+  `current_volunteers` int DEFAULT '0',
+  `image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `status` enum('upcoming','ongoing','completed') COLLATE utf8mb4_general_ci DEFAULT 'upcoming',
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `initiative_id` (`initiative_id`),
@@ -166,26 +166,26 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `initiatives`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `initiatives` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) NOT NULL,
-  `slug` varchar(200) NOT NULL,
-  `description` text DEFAULT NULL,
-  `objectives` text DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `slug` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
+  `objectives` text COLLATE utf8mb4_general_ci,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
-  `location` varchar(200) DEFAULT NULL,
+  `location` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `latitude` decimal(10,8) DEFAULT NULL,
   `longitude` decimal(11,8) DEFAULT NULL,
-  `partner_id` int(11) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `status` enum('upcoming','ongoing','completed') DEFAULT 'upcoming',
-  `target_trees` int(11) DEFAULT 0,
-  `planted_trees` int(11) DEFAULT 0,
-  `is_active` tinyint(1) DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `partner_id` int DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `status` enum('upcoming','ongoing','completed') COLLATE utf8mb4_general_ci DEFAULT 'upcoming',
+  `target_trees` int DEFAULT '0',
+  `planted_trees` int DEFAULT '0',
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `partner_id` (`partner_id`),
@@ -209,14 +209,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `marquee_images`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `marquee_images` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `filename` varchar(255) NOT NULL,
-  `sort_order` int(11) DEFAULT 0,
-  `is_active` tinyint(1) DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id` int NOT NULL AUTO_INCREMENT,
+  `filename` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `sort_order` int DEFAULT '0',
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -236,17 +236,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `newsletter_subscribers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `newsletter_subscribers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `is_subscribed` tinyint(1) DEFAULT 1,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `is_subscribed` tinyint(1) DEFAULT '1',
   `subscribed_at` timestamp NULL DEFAULT NULL,
   `unsubscribed_at` timestamp NULL DEFAULT NULL,
-  `subscription_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `subscription_token` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `subscription_token` (`subscription_token`)
@@ -268,16 +268,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `order_items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `quantity` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `quantity` int NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `total` decimal(10,2) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   KEY `product_id` (`product_id`),
@@ -302,24 +302,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `order_number` varchar(50) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `order_number` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `total_amount` decimal(10,2) NOT NULL,
-  `status` enum('pending','processing','shipped','delivered') DEFAULT 'pending',
-  `payment_status` enum('pending','paid','failed') DEFAULT 'pending',
-  `payment_method` varchar(50) DEFAULT NULL,
-  `transaction_id` varchar(100) DEFAULT NULL,
-  `shipping_name` varchar(100) DEFAULT NULL,
-  `shipping_phone` varchar(20) DEFAULT NULL,
-  `shipping_email` varchar(100) DEFAULT NULL,
-  `shipping_county` varchar(100) DEFAULT NULL,
-  `shipping_subcounty` varchar(100) DEFAULT NULL,
-  `shipping_address` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` enum('pending','processing','shipped','delivered') COLLATE utf8mb4_general_ci DEFAULT 'pending',
+  `payment_status` enum('pending','paid','failed') COLLATE utf8mb4_general_ci DEFAULT 'pending',
+  `payment_method` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `transaction_id` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `shipping_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `shipping_phone` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `shipping_email` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `shipping_county` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `shipping_subcounty` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `shipping_address` text COLLATE utf8mb4_general_ci,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `order_number` (`order_number`),
   KEY `user_id` (`user_id`),
@@ -343,20 +343,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `partners`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `partners` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `address` text DEFAULT NULL,
-  `website` varchar(255) DEFAULT NULL,
-  `logo` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `sponsorship_level` enum('bronze','silver','gold','platinum') DEFAULT 'bronze',
-  `is_active` tinyint(1) DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `address` text COLLATE utf8mb4_general_ci,
+  `website` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `logo` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
+  `sponsorship_level` enum('bronze','silver','gold','platinum') COLLATE utf8mb4_general_ci DEFAULT 'bronze',
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -378,20 +378,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `slug` varchar(100) NOT NULL,
-  `description` text DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `slug` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
   `price` decimal(10,2) NOT NULL,
-  `stock_quantity` int(11) DEFAULT 0,
-  `category` enum('seedlings','manure','pesticides','tools') NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `planting_tips` text DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `stock_quantity` int DEFAULT '0',
+  `category` enum('seedlings','manure','pesticides','tools') COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `planting_tips` text COLLATE utf8mb4_general_ci,
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -403,7 +403,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Indigenous Seedlings Pack','indigenous-seedlings-pack','A pack of 10 indigenous tree seedlings including Acacia, Croton, and Markhamia species.',500.00,500,'seedlings',NULL,'Plant during the rainy season. Water regularly for the first 3 months. Protect from livestock.',1,'2025-09-23 18:50:30','2025-09-23 18:50:30'),(2,'Organic Manure','organic-manure','High-quality organic manure made from decomposed plant matter and animal waste.',300.00,200,'manure',NULL,'Apply 2kg per tree monthly during growing season. Mix with soil before planting.',1,'2025-09-23 18:50:30','2025-09-23 18:50:30'),(3,'Neem Tree Seedlings','neem-tree-seedlings','Neem (Azadirachta indica) seedlings known for their pest-repelling properties and drought resistance.',150.00,300,'seedlings','68d390bedc652.jpeg','Plant in well-drained soil. Requires minimal water once established. Prune regularly.',1,'2025-09-23 18:50:30','2025-09-24 06:33:34'),(4,'Eco-Friendly Pesticide','eco-friendly-pesticide','Natural pesticide made from neem oil and other plant extracts. Safe for beneficial insects.',800.00,99,'pesticides',NULL,'Apply early morning or late evening. Avoid spraying during flowering periods.',1,'2025-09-23 18:50:30','2025-09-23 19:26:45'),(5,'Bimunor&#039;s Oak','bimunor039s-oak','The Bimundors Oak (Quercus × bimundorum) is a hybrid of a North American White Oak (Quercus alba) and a European English Oak (Quercus robur), named for combining traits from both &quot;worlds&quot;. It is a fast-growing, long-lived tree that produces abundant acorns, making it excellent for wildlife and landscaping. The tree is adaptable to a wide range of soils, prefers full sun, and is hardy to USDA Zones 5 to 8.',340.00,10000,'seedlings','68d390652fdfe.webp','o plant a &quot;Bimundors Oak,&quot; start by collecting and testing acorns to find viable ones that sink in water. Plant the acorns in pots with good drainage, simulating winter conditions (cold stratification) if the species requires it, and then grow the seedlings for several months. When the sapling is 1-2 feet tall, or outgrows its pot, transplant it to a permanent location, digging a hole twice as wide as the root ball. Ensure the top of the root ball is level with or slightly higher than the surrounding soil, water well, and protect the young tree from herbivores with protective caging.',1,'2025-09-24 06:32:05','2025-09-24 06:32:05');
+INSERT INTO `products` VALUES (1,'Indigenous Seedlings Pack','indigenous-seedlings-pack','A pack of 10 indigenous tree seedlings including Acacia, Croton, and Markhamia species.',500.00,500,'seedlings',NULL,'Plant during the rainy season. Water regularly for the first 3 months. Protect from livestock.',1,'2025-09-23 18:50:30','2025-09-23 18:50:30'),(2,'Organic Manure','organic-manure','High-quality organic manure made from decomposed plant matter and animal waste.',300.00,200,'manure',NULL,'Apply 2kg per tree monthly during growing season. Mix with soil before planting.',1,'2025-09-23 18:50:30','2025-09-23 18:50:30'),(3,'Neem Tree Seedlings','neem-tree-seedlings','Neem (Azadirachta indica) seedlings known for their pest-repelling properties and drought resistance.',150.00,300,'seedlings','68d390bedc652.jpeg','Plant in well-drained soil. Requires minimal water once established. Prune regularly.',1,'2025-09-23 18:50:30','2025-09-24 06:33:34'),(4,'Eco-Friendly Pesticide','eco-friendly-pesticide','Natural pesticide made from neem oil and other plant extracts. Safe for beneficial insects.',800.00,99,'pesticides',NULL,'Apply early morning or late evening. Avoid spraying during flowering periods.',1,'2025-09-23 18:50:30','2025-09-23 19:26:45'),(5,'Bimunor&#039;s Oak','bimunor039s-oak','The Bimundors Oak (Quercus ',340.00,10000,'seedlings','68d390652fdfe.webp','o plant a &quot;Bimundors Oak,&quot; start by collecting and testing acorns to find viable ones that sink in water. Plant the acorns in pots with good drainage, simulating winter conditions (cold stratification) if the species requires it, and then grow the seedlings for several months. When the sapling is 1-2 feet tall, or outgrows its pot, transplant it to a permanent location, digging a hole twice as wide as the root ball. Ensure the top of the root ball is level with or slightly higher than the surrounding soil, water well, and protect the young tree from herbivores with protective caging.',1,'2025-09-24 06:32:05','2025-09-24 06:32:05');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -413,14 +413,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `settings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `key` varchar(100) NOT NULL,
-  `value` text DEFAULT NULL,
-  `type` varchar(20) DEFAULT 'string',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id` int NOT NULL AUTO_INCREMENT,
+  `key` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `value` text COLLATE utf8mb4_general_ci,
+  `type` varchar(20) COLLATE utf8mb4_general_ci DEFAULT 'string',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `key` (`key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -442,21 +442,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tree_plantings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tree_plantings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `event_id` int(11) DEFAULT NULL,
-  `initiative_id` int(11) DEFAULT NULL,
-  `tree_type` varchar(100) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `event_id` int DEFAULT NULL,
+  `initiative_id` int DEFAULT NULL,
+  `tree_type` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `latitude` decimal(10,8) DEFAULT NULL,
   `longitude` decimal(11,8) DEFAULT NULL,
   `planting_date` date DEFAULT NULL,
-  `status` enum('planted','verified','dead') DEFAULT 'planted',
-  `photo` varchar(255) DEFAULT NULL,
-  `notes` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` enum('planted','verified','dead') COLLATE utf8mb4_general_ci DEFAULT 'planted',
+  `photo` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `notes` text COLLATE utf8mb4_general_ci,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `event_id` (`event_id`),
@@ -482,12 +482,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_badges`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_badges` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `badge_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `badge_id` int DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_user_badge` (`user_id`,`badge_id`),
   KEY `badge_id` (`badge_id`),
@@ -511,23 +511,23 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `county` varchar(100) DEFAULT NULL,
-  `subcounty` varchar(100) DEFAULT NULL,
-  `role` enum('admin','partner','user') DEFAULT 'user',
-  `is_active` tinyint(1) DEFAULT 1,
-  `email_verified` tinyint(1) DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `county` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `subcounty` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `role` enum('admin','partner','user','author') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'user',
+  `is_active` tinyint(1) DEFAULT '1',
+  `email_verified` tinyint(1) DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -536,7 +536,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (4,'Harrison Wekesa','harrisonwekesa09@gmail.com','+254741947264','$2y$10$RzvBwA62tlW3dmrO9oqPhessQrXLZCC8VJlvhh0B1n2ZC8qsRXu1u','Trans-Nzoia','kwanza','user',1,0,'2025-09-23 19:26:21','2025-09-23 19:26:21'),(5,'admin','admin@greenearth.com','+254741947265','$2y$10$23JMPAIpdsw.msC0SJB3suWmnKUEjT0nFTnhPsU4c9S8SVPWdeyyC','Trans-Nzoia','kwanza','admin',1,1,'2025-09-23 20:44:29','2025-09-23 20:47:45');
+INSERT INTO `users` VALUES (4,'Harrison Wekesa','harrisonwekesa09@gmail.com','+254741947264','$2y$10$RzvBwA62tlW3dmrO9oqPhessQrXLZCC8VJlvhh0B1n2ZC8qsRXu1u','Trans-Nzoia','kwanza','user',1,0,'2025-09-23 19:26:21','2025-09-23 19:26:21'),(5,'admin','admin@greenearth.com','+254741947265','$2y$10$23JMPAIpdsw.msC0SJB3suWmnKUEjT0nFTnhPsU4c9S8SVPWdeyyC','Trans-Nzoia','kwanza','admin',1,1,'2025-09-23 20:44:29','2025-09-23 20:47:45'),(6,'John Mwangi','john.mwangi@example.com','+254700000001','$2y$10$abcdefghijklmnopqrstuv','Nairobi','Westlands','author',1,1,'2025-09-24 08:29:17','2025-09-24 08:29:17'),(7,'Mary Wanjiku','mary.wanjiku@example.com','+254700000002','$2y$10$abcdefghijklmnopqrstuv','Kiambu','Ruiru','author',1,1,'2025-09-24 08:29:17','2025-09-24 08:29:17'),(8,'Peter Otieno','peter.otieno@example.com','+254700000003','$2y$10$abcdefghijklmnopqrstuv','Kisumu','Kisumu East','author',1,1,'2025-09-24 08:29:17','2025-09-24 08:29:17');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -546,15 +546,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `volunteer_signups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `volunteer_signups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `event_id` int(11) DEFAULT NULL,
-  `motivation` text DEFAULT NULL,
-  `status` enum('pending','confirmed','cancelled') DEFAULT 'pending',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `event_id` int DEFAULT NULL,
+  `motivation` text COLLATE utf8mb4_general_ci,
+  `status` enum('pending','confirmed','cancelled') COLLATE utf8mb4_general_ci DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_signup` (`user_id`,`event_id`),
   KEY `event_id` (`event_id`),
@@ -581,4 +581,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-24 10:02:48
+-- Dump completed on 2025-09-24 11:33:03
