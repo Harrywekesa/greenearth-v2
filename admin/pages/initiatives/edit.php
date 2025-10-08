@@ -45,7 +45,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $partner_id = (int)$_POST['partner_id'];
     $target_trees = (int)$_POST['target_trees'];
     $planted_trees = (int)$_POST['planted_trees'];
-    $status = sanitize_input($_POST['status']);
+    $status = !empty($_POST['status']) ? sanitize_input($_POST['status']) : 'upcoming';
     $is_active = isset($_POST['is_active']) ? 1 : 0;
     $slug = create_slug($title);
     
@@ -66,7 +66,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image = uniqid() . '.' . strtolower($file_extension);
         move_uploaded_file($_FILES['image']['tmp_name'], $upload_dir . $image);
     }
-    
     $stmt = $connection->prepare("UPDATE initiatives SET title = ?, slug = ?, description = ?, objectives = ?, start_date = ?, end_date = ?, location = ?, latitude = ?, longitude = ?, partner_id = ?, target_trees = ?, planted_trees = ?, status = ?, image = ?, is_active = ? WHERE id = ?");
     $stmt->bind_param("ssssssssdiiddsii", $title, $slug, $description, $objectives, $start_date, $end_date, $location, $latitude, $longitude, $partner_id, $target_trees, $planted_trees, $status, $image, $is_active, $initiative_id);
     

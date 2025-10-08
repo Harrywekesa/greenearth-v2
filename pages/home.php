@@ -1,4 +1,3 @@
-<!-- pages/home.php -->
 <div class="hero-gradient text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div class="text-center">
@@ -92,23 +91,23 @@
                 <div class="bg-gray-50 rounded-lg p-6">
                     <h3 class="text-xl font-bold text-gray-900 mb-4">Featured Partners</h3>
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="text-center">
-                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 mx-auto"></div>
-                            <div class="mt-2 text-sm font-medium">WWF Kenya</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 mx-auto"></div>
-                            <div class="mt-2 text-sm font-medium">UNEP</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 mx-auto"></div>
-                            <div class="mt-2 text-sm font-medium">KEFRI</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 mx-auto"></div>
-                            <div class="mt-2 text-sm font-medium">Green Belt Movement</div>
-                        </div>
-                    </div>
+    <div class="text-center">
+        <img src="admin/uploads/products/wwf.png" alt="WWF Kenya" class="w-16 h-16 mx-auto object-contain rounded-xl">
+        <div class="mt-2 text-sm font-medium">WWF Kenya</div>
+    </div>
+    <div class="text-center">
+        <img src="admin/uploads/products/unep.jpg" alt="UNEP" class="w-16 h-16 mx-auto object-contain rounded-xl">
+        <div class="mt-2 text-sm font-medium">UNEP</div>
+    </div>
+    <div class="text-center">
+        <img src="admin/uploads/products/kefri.jpg" alt="KEFRI" class="w-16 h-16 mx-auto object-contain rounded-xl">
+        <div class="mt-2 text-sm font-medium">KEFRI</div>
+    </div>
+    <div class="text-center">
+        <img src="admin/uploads/products/greenbelt.jpg" alt="Green Belt Movement" class="w-16 h-16 mx-auto object-contain rounded-xl">
+        <div class="mt-2 text-sm font-medium">Green Belt Movement</div>
+    </div>
+</div>
                 </div>
 
                 <!-- Featured Products -->
@@ -116,32 +115,40 @@
                     <h3 class="text-xl font-bold text-gray-900 mb-4">Featured Products</h3>
                     <div class="space-y-4">
                         <div class="flex items-center">
-                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
-                            <div class="ml-4">
-                                <div class="font-medium">Indigenous Seedlings Pack</div>
-                                <div class="text-green-600 font-bold">KES 500</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
-                            <div class="ml-4">
-                                <div class="font-medium">Organic Manure</div>
-                                <div class="text-green-600 font-bold">KES 300</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
-                            <div class="ml-4">
-                                <div class="font-medium">Tree Care Kit</div>
-                                <div class="text-green-600 font-bold">KES 800</div>
-                            </div>
-                        </div>
+    <img src="admin/uploads/products/seeds.jpg" alt="Indigenous Seedlings Pack" class="w-16 h-16 rounded-xl object-cover">
+    <div class="ml-4">
+        <div class="font-medium">Indigenous Seedlings Pack</div>
+        <div class="text-green-600 font-bold">KES 500</div>
+    </div>
+</div>
+
+<div class="flex items-center">
+    <img src="admin/uploads/products/manure.jpg" alt="Organic Manure" class="w-16 h-16 rounded-xl object-cover">
+    <div class="ml-4">
+        <div class="font-medium">Organic Manure</div>
+        <div class="text-green-600 font-bold">KES 300</div>
+    </div>
+</div>
+
+<div class="flex items-center">
+    <img src="admin/uploads/products/treekit.png" alt="Tree Care Kit" class="w-16 h-16 rounded-xl object-cover">
+    <div class="ml-4">
+        <div class="font-medium">Tree Care Kit</div>
+        <div class="text-green-600 font-bold">KES 800</div>
+    </div>
+</div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
 // Initialize Leaflet map

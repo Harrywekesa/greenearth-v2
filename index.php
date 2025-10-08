@@ -110,6 +110,9 @@ switch($page) {
     case 'order_detail':
         include 'pages/order_detail.php';
         break;
+    case 'zones_with_trees':
+        include 'pages/zones_with_trees.php';
+        break;
     default:
         include 'pages/home.php';
 }
